@@ -2,8 +2,7 @@ name: eso
 description: 亦搜，亦看，亦闻
 publish_to: none
 version: 1.22.4+12204
-homepage: https://github.com/mabdc/eso
-author: mabdc
+homepage: https://github.com/lx3133584/eso
 
 environment:
   sdk: ">=2.7.0 <3.2.0"
@@ -74,6 +73,7 @@ dependencies:
     path: modules/dart-webdav
   webview_flutter:
     path: modules/webview_flutter
+  flutter_inappwebview: ^5.4.3
   http_multi_server: ^3.2.0
   window_manager: ^0.1.5
   hive_flutter: ^1.1.0

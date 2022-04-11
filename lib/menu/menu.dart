@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:eso/menu/menu_item.dart';
+import 'package:eso/menu/menu_item.dart' as myMenuItem;
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
 void voidValueFunction(_) {}
 
 class Menu<T> extends StatelessWidget {
-  final List<MenuItem<T>> items;
+  final List<myMenuItem.MenuItem<T>> items;
   final IconData icon;
   final Color color;
   final String tooltip;

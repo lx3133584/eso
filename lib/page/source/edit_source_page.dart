@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:eso/api/api.dart';
 import 'package:eso/api/api_from_rule.dart';
@@ -6,7 +5,7 @@ import 'package:eso/database/rule.dart';
 import 'package:eso/database/rule_dao.dart';
 import 'package:eso/menu/menu.dart';
 import 'package:eso/menu/menu_edit_source.dart';
-import 'package:eso/menu/menu_item.dart';
+import 'package:eso/menu/menu_item.dart' as myMenuItem;
 import 'package:eso/model/edit_source_provider.dart';
 import 'package:eso/profile.dart';
 import 'package:eso/page/langding_page.dart';
@@ -15,7 +14,6 @@ import 'package:eso/page/source/edit_rule_page.dart';
 import 'package:eso/ui/ui_text_field.dart';
 import 'package:eso/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -339,44 +337,44 @@ class _EditSourcePageState extends State<EditSourcePage> {
             tooltip: "选项",
             items: [
               rule.enableSearch
-                  ? MenuItem(
+                  ? myMenuItem.MenuItem(
                       text: '搜索',
                       icon: OMIcons.toggleOn,
                       color: Global.primaryColor,
                       value: MenuEditSource.disable_search,
                     )
-                  : MenuItem(
+                  : myMenuItem.MenuItem(
                       text: '搜索',
                       icon: OMIcons.toggleOff,
                       color: Colors.grey,
                       value: MenuEditSource.enable_search,
                     ),
               rule.enableDiscover
-                  ? MenuItem(
+                  ? myMenuItem.MenuItem(
                       text: '发现',
                       icon: OMIcons.toggleOn,
                       color: Global.primaryColor,
                       value: MenuEditSource.disable_discover,
                     )
-                  : MenuItem(
+                  : myMenuItem.MenuItem(
                       text: '发现',
                       icon: OMIcons.toggleOff,
                       color: Colors.grey,
                       value: MenuEditSource.enable_discover,
                     ),
-              MenuItem(
+              myMenuItem.MenuItem(
                 text: '置顶',
                 icon: OMIcons.arrowUpward,
                 value: MenuEditSource.top,
                 color: Global.primaryColor,
               ),
-              MenuItem(
+              myMenuItem.MenuItem(
                 text: '预览',
                 icon: OMIcons.category,
                 value: MenuEditSource.preview,
                 color: Global.primaryColor,
               ),
-              MenuItem(
+              myMenuItem.MenuItem(
                 text: '删除',
                 icon: OMIcons.deleteSweep,
                 value: MenuEditSource.delete_this,

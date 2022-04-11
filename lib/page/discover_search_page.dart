@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:eso/api/api.dart';
@@ -16,7 +17,6 @@ import 'package:eso/ui/widgets/right_sheet.dart';
 import 'package:eso/ui/widgets/size_bar.dart';
 import 'package:eso/ui/widgets/state_view.dart';
 import 'package:eso/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eso/ui/round_indicator.dart';
@@ -129,7 +129,7 @@ class _DiscoverSearchPageState extends State<DiscoverSearchPage>
                       icon: Icon(Icons.close),
                       onPressed: () => pageController.toggleSearching(),
                     ),
-                    backgroundColor: Theme.of(context).appBarTheme.color,
+                    backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
                     iconTheme: _iconTheme.copyWith(color: _color),
                     actionsIconTheme: _iconTheme.copyWith(color: _color),
                     actions: pageController.queryController.text == ''
@@ -185,22 +185,15 @@ class _DiscoverSearchPageState extends State<DiscoverSearchPage>
       width:
           22 + min(6 * utf8.encode(pair.name).length, 12 * pair.name.length).toDouble(),
       margin: EdgeInsets.fromLTRB(4, 8, 4, 0),
-      child: OutlineButton(
+      child: OutlinedButton(
         child: Text(
           pair.name,
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(fontSize: 12, color: color),
         ),
-        padding: EdgeInsets.zero,
-        textColor: color,
         onPressed: () {
           _select(pageController, index, pair);
           if (onTap != null) onTap();
         },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        borderSide:
-            color != null ? BorderSide(color: color, width: Global.borderSize) : null,
       ),
       decoration: BoxDecoration(
         color: bgColor,
@@ -552,7 +545,9 @@ class _DiscoverSearchPageState extends State<DiscoverSearchPage>
               autofocus: false,
               controller: TextEditingController(text: "${item.page}"),
               textAlign: TextAlign.end,
-              keyboardType: TextInputType.number,
+              keyboardType: Platform.isIOS
+                  ? TextInputType.numberWithOptions(signed: true, decimal: true)
+                  : TextInputType.number,
               decoration: const InputDecoration(
                 suffixText: "页",
                 contentPadding: EdgeInsets.all(6),

@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:dlna/dlna.dart';
 import 'package:eso/database/history_item_manager.dart';
 import 'package:eso/menu/menu.dart';
-import 'package:eso/menu/menu_item.dart';
+import 'package:eso/menu/menu_item.dart' as myMenuItem;
 import 'package:eso/ui/ui_chapter_select.dart';
 import 'package:eso/utils/flutter_slider.dart';
 import 'package:flutter/material.dart';
@@ -234,7 +233,7 @@ class VideoPage extends StatelessWidget {
             padding: EdgeInsets.zero,
             icon: Icon(Icons.open_in_browser),
             onPressed: () =>
-                launch(searchItem.chapters[searchItem.durChapterIndex].contentUrl),
+                launchUrl(Uri(scheme: searchItem.chapters[searchItem.durChapterIndex].contentUrl)),
             tooltip: "查看原网页",
           ),
         ),
@@ -256,7 +255,7 @@ class VideoPage extends StatelessWidget {
             icon: Icons.slow_motion_video_outlined,
             color: Colors.white,
             items: [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
-                .map((value) => MenuItem<double>(
+                .map((value) => myMenuItem.MenuItem<double>(
                       value: value,
                       text: "$value",
                       textColor: (speed - value).abs() < 0.1 ? primaryColor : null,
@@ -666,7 +665,7 @@ class VideoPageProvider with ChangeNotifier, WidgetsBindingObserver {
   void openInNew() {
     if (_disposed || _content == null) return;
     _controllerTime = DateTime.now();
-    launch(_content[0]);
+    launchUrl(Uri(scheme: _content[0]));
   }
 
   Widget _hint;
