@@ -66,13 +66,13 @@ class UISetting extends StatelessWidget {
                 ),
                 Divider(),
                 RadioListTile<int>(
-                  title: Text('搜藏-发现'),
+                  title: Text('收藏-站点'),
                   value: 2,
                   groupValue: profile.bottomCount,
                   onChanged: (int value) => profile.bottomCount = value,
                 ),
                 RadioListTile<int>(
-                  title: Text('搜藏-发现-历史-关于'),
+                  title: Text('收藏-站点-历史-关于'),
                   value: 4,
                   groupValue: profile.bottomCount,
                   onChanged: (int value) => profile.bottomCount = value,
@@ -152,7 +152,7 @@ class UISetting extends StatelessWidget {
                                   ),
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[Icon(FIcons.compass), Text("发现")],
+                                    children: <Widget>[Icon(FIcons.compass), Text("站点")],
                                   ),
                                 ],
                               ),

@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                                       children: <Widget>[
                                         Icon(FIcons.compass,
                                             color: getColor(pageSwitch, context, 1)),
-                                        Text("发现",
+                                        Text("站点",
                                             style: TextStyle(
                                                 color: getColor(pageSwitch, context, 1)))
                                       ],

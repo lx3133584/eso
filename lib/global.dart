@@ -13,15 +13,17 @@ import 'package:sqflite/src/factory_mixin.dart' as impl;
 import 'package:text_composition/text_composition.dart';
 import 'database/database.dart';
 import 'database/history_item_manager.dart';
+import 'database/rule.dart';
 import 'database/rule_dao.dart';
 import 'page/novel_page_refactor.dart';
 import 'utils/cache_util.dart';
+import 'package:http/http.dart' as http;
 
 class Global with ChangeNotifier {
   static String appName = '亦搜';
   static String appVersion = '1.20.4';
   static String appBuildNumber = '12004';
-  static String appPackageName = "com.mabdc.eso";
+  static String appPackageName = "cn.net.duoduo.eso";
   static bool needShowAbout = true;
 
   static const waitingPath = "lib/assets/waiting.png";
@@ -76,7 +78,7 @@ class Global with ChangeNotifier {
     if (isDesktop) {
       sqflite.databaseFactory = databaseFactoryFfi;
       final factory = sqflite.databaseFactory as impl.SqfliteDatabaseFactoryMixin;
-      factory.setDatabasesPath(
+      factory.setDatabasesPathOrNull(
           await CacheUtil(backup: true, basePath: "database").cacheDir());
     }
     _prefs = await SharedPreferences.getInstance();
@@ -89,6 +91,24 @@ class Global with ChangeNotifier {
         .addMigrations(_migrations)
         .build();
     _ruleDao = _database.ruleDao;
+
+    // 规则为空则自动获取默认规则
+    final allRuleList = await _ruleDao.findAllRules();
+    if (allRuleList.isEmpty) {
+      final res = await http.get(Uri.parse('https://cdn.jsdelivr.net/gh/mabDc/eso_source/manifest'), headers: {
+        'User-Agent':
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36'
+      });
+      final json = jsonDecode(utf8.decode(res.bodyBytes).trim());
+      if (json is List) {
+        final okrules = json
+            .map((rule) => Rule.fromJson(rule))
+            .where((rule) => rule.name.isNotEmpty && rule.host.isNotEmpty)
+            .toList();
+        await _ruleDao.insertOrUpdateRules(okrules);
+      }
+    }
+
     await initFont();
     final packageInfo = await PackageInfo.fromPlatform();
     appVersion = packageInfo.version;

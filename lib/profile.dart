@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:eso/database/search_item_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'global.dart';
 
@@ -50,7 +48,7 @@ class Profile with ChangeNotifier {
     _showMangaStatus = false;
     _showMangaInfo = true;
     _searchPostion = searchDocker;
-    _bottomCount = 2;
+    _bottomCount = 4;
     _autoRefresh = false;
     _darkMode = dartModeAuto;
     _primaryColor = 0xFF4BB0A0;

@@ -1,4 +1,4 @@
-package com.mabdc.eso
+package cn.net.duoduo.eso
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -233,7 +233,7 @@ class VideoPage extends StatelessWidget {
             padding: EdgeInsets.zero,
             icon: Icon(Icons.open_in_browser),
             onPressed: () =>
-                launchUrl(Uri(scheme: searchItem.chapters[searchItem.durChapterIndex].contentUrl)),
+                launchUrl(Uri.parse(searchItem.chapters[searchItem.durChapterIndex].contentUrl)),
             tooltip: "查看原网页",
           ),
         ),
@@ -665,7 +665,7 @@ class VideoPageProvider with ChangeNotifier, WidgetsBindingObserver {
   void openInNew() {
     if (_disposed || _content == null) return;
     _controllerTime = DateTime.now();
-    launchUrl(Uri(scheme: _content[0]));
+    launchUrl(Uri.parse(_content[0]));
   }
 
   Widget _hint;

@@ -295,7 +295,7 @@ class _EditSourcePageState extends State<EditSourcePage> {
                       color: rule.enableDiscover ? _theme.primaryColor : Colors.grey,
                     ),
                     Text(
-                      "发现",
+                      "站点",
                       style: TextStyle(
                         fontSize: 12,
                         color: rule.enableDiscover ? _theme.primaryColor : Colors.grey,
@@ -351,13 +351,13 @@ class _EditSourcePageState extends State<EditSourcePage> {
                     ),
               rule.enableDiscover
                   ? myMenuItem.MenuItem(
-                      text: '发现',
+                      text: '站点',
                       icon: OMIcons.toggleOn,
                       color: Global.primaryColor,
                       value: MenuEditSource.disable_discover,
                     )
                   : myMenuItem.MenuItem(
-                      text: '发现',
+                      text: '站点',
                       icon: OMIcons.toggleOff,
                       color: Colors.grey,
                       value: MenuEditSource.enable_discover,
